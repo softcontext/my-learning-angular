@@ -1,0 +1,30 @@
+<h1>
+  {{ title }}
+</h1>
+<p>
+  {{ body }}
+</p>
+
+<hr/>
+
+<div>
+  <pre>{{experiments | json}}</pre>
+</div>
+
+<!--
+  app-experiment-detail 문자열은 ExperimentDetailComponent 클래스의
+  selector 항목으로 지정한 키워드입니다.
+  *ngFor: 앵귤러가 지원하는 구조 Directive 로써
+  반복처리를 수행할 수 있습니다.
+
+  "let exper of experiments"
+  "let 임시변수 of 배열"
+
+  [experiment]="exper" :
+  app-experiment-detail 가 가리키는 ExperimentDetailComponent 객체가
+  experiment 라는 변수를 가지고 있는데,
+  이 변수에 exper 변수가 가진 값을 할당한다.
+ -->
+<app-experiment-detail
+  *ngFor="let exper of experiments; let i = index"
+  [experiment]="exper" [b]="i"></app-experiment-detail>
