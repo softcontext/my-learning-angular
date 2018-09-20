@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>{{title}}</h1>
+  <div class="">
+    <ul class="nav nav-pills">
+      <!--
+        routerLinkActive="active :
+        class="active" 속성을 라우팅 처리에 따라 동적으로 변경해주는 설정
+       -->
+      <li routerLinkActive="active"><a routerLink="home">Home</a></li>
+      <li routerLinkActive="active"><a routerLink="about">About</a></li>
+      <li routerLinkActive="active"><a routerLink="contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="change-area">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="">
+    <app-home></app-home>
+  </div>
+  <div class="">
+    <app-about></app-about>
+  </div>
+  <div class="">
+    <app-contact></app-contact>
+  </div>
+</div>

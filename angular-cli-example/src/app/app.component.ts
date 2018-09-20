@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +9,30 @@ export class AppComponent { // 화면 데이터, 로직(주로 이벤트 함수)
   title = 'Hello World!';
   message: string = '안녕하세요!';
 
-  popup(data, t, e, $e){
+  @ViewChild('btn')
+  myButton;
+
+  popup(data, t, e, $e, $t){
     console.log(data);
     // Hi
-    console.log(t);
+    console.log(t); // this 라는 예약어는 엘리먼트가 아닌 객체를 가리킨다.
     // AppComponent {title: "Hello World!", message: "안녕하세요!"}
 
-    console.log(e);
+    console.log(e); // event 라는 예약어를 사용하지 못한다.
     // undefined
-    console.log($e);
+    console.log($e); // $event 라는 키워드로 이벤트 객체를 받는다.
     // MouseEvent {
     // isTrusted: true,
     // screenX: 515, screenY: 377,
     // clientX: 61, clientY: 251, …}
+
+    console.log('--------')
+    console.log($t); // $this 라는 예약어는 없다.
+
+    console.log(this.myButton);
+    // #btn: 화면참조 설정 + @ViewChild('btn') 설정으로 엘리먼트 참조를
+    // 얻을 수 있다.
+    console.log(this.myButton.nativeElement.textContent);
 
     alert('^____^');
   }
