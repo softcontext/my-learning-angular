@@ -1,0 +1,21 @@
+<h3>Kpop Idols</h3>
+
+<ng-template ngFor let-idol [ngForOf]="idols"
+   let-i="index" let-even="even" [ngForTrackBy]="trackById">
+   <div class="panel panel-default">
+     <div class="panel-heading">{{i+1}} {{idol.name}} {{even}}</div>
+     <div class="panel-body">
+       <img src="./assets/image/{{idol.image}}" width="300px" class="img-thumbnail">
+     </div>
+   </div>
+</ng-template>
+
+<!--
+<div *ngFor="let idol of idols" class="panel panel-default">
+  <div class="panel-heading">{{idol.name}}</div>
+  <div class="panel-body">
+    <img src="./assets/image/{{idol.image}}" width="300px" class="img-thumbnail">
+  </div>
+</div> -->
+
+<pre>{{idols | json}}</pre>
