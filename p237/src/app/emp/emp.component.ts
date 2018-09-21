@@ -23,22 +23,35 @@ export class EmpComponent implements OnInit {
   }
 
   getEmps() {
+    // getEmps() 메소드는 Observable 객체를 리턴합니다.
+    // 신문사 - 구독자 패턴
+    // Publisher - subscriber 패턴
+    // Subject - Observable 패턴
     this.empHttpService.getEmps()
         .subscribe(
-          emps => this.employees = emps,
-          error => this.errorMessage = <any>error);
+          emps => this.employees = emps, // 성공 콜백
+          error => this.errorMessage = <any>error); // 실패 콜백
   }
 
-  addEmp(firstName: string, lastName: string) {
-    alert('addEmp() # ' + firstName + ' ' + lastName);
-  }
+  // addEmp(firstName: string, lastName: string) {
+  //   alert('addEmp() # ' + firstName + ' ' + lastName);
+  // }
 
   removeEmp(person: any) {
     alert(JSON.stringify(person));
 
     let id = person.id;
-    let targetIndex = this.employees.findIndex(emp => emp.id === id);
-    this.employees.splice(targetIndex, 1);
+
+    // 원격서버에 삭제를 요청해서 정상응답을 받으면
+    // 컴포넌트 객체가 가진 배열에서 삭제합니다.
+    this.empHttpService.removeEmp(person)
+        .subscribe( // 성공 콜백
+          noResponse => {
+            let targetIndex = this.employees
+                .findIndex(emp => emp.id === id);
+            this.employees.splice(targetIndex, 1);
+          },
+          error => this.errorMessage = <any>error); // 실패 콜백
 
     return false;
     // preventDefault
@@ -52,13 +65,24 @@ export class EmpComponent implements OnInit {
 
       alert('onSubmit() # ' + emp.firstName + ' ' + emp.lastName);
 
-      let maxId = Math.max(...this.employees.map(emp => emp.id));
+      // let maxId = Math.max(...this.employees.map(emp => emp.id));
+      //
+      // this.employees.push({
+      //   id: maxId + 1,
+      //   firstName: emp.firstName,
+      //   lastName: emp.lastName
+      // });
 
-      this.employees.push({
-        id: maxId + 1,
-        firstName: emp.firstName,
-        lastName: emp.lastName
-      });
+      this.empHttpService.addEmp(emp.firstName, emp.lastName)
+          .subscribe(
+            res => { // 성공 콜백
+              this.employees.push({
+                id: res.id,
+                firstName: emp.firstName,
+                lastName: emp.lastName
+              });
+            },
+            error => this.errorMessage = <any>error); // 실패 콜백
     }
   }
 
