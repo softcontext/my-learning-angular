@@ -1,0 +1,15 @@
+.outlet {
+  padding: 10px;
+  border: 1px solid silver;
+}
+
+/* 이 컴포넌트와 자식 컴포넌트들에게 디자인을 적용합니다. */
+/deep/ p {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+li {
+  display: inline-block;
+  margin-right: 10px;
+}

@@ -1,0 +1,20 @@
+/deep/ p {
+  font-size: 30px;
+}
+
+td {
+  padding: 5px 20px 5px 0px;
+}
+
+.outlet {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+/deep/ a::after {
+  content: " ";
+}
+
+/deep/ a:link {
+  text-decoration: none;
+}
